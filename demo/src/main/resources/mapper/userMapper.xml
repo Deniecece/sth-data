@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.UserIDao">
+	
+	<resultMap type="com.example.demo.domain.User" id="BaseResultMap">
+		<id column="id" property="id" jdbcType="INTEGER"/>
+		<result column="username" property="username" jdbcType="VARCHAR"/>
+		<result column="sex" property="sex" jdbcType="VARCHAR"/>
+		<result column="password" property="password" jdbcType="VARCHAR"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id,username,sex
+	</sql>
+	
+	<select id="getUserList" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"></include>
+		FROM T_USER
+	</select>
+	
+	<select id="getUserById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List"></include>
+		FROM T_USER
+	</select>
+	
+	<insert id="addUser" parameterType="com.example.demo.domain.User">
+		INSERT INTO T_USER(USERNAME,SEX,PASSWORD) VALUES
+		(#{username},#{sex},#{password})
+	</insert>
+	
+	<update id="updateUserById" parameterType="java.util.Map" >
+        UPDATE
+        T_USER
+        SET
+        username = #{user.username},sex = #{user.sex}
+        WHERE
+        id = #{id}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer" >
+        DELETE FROM
+        T_USER
+        WHERE
+        id = #{id}
+    </delete>
+</mapper>

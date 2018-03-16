@@ -1,0 +1,42 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.0.RC1'
+	}
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.zmx'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
+}
+
+
+dependencies {
+	//ÃÌº”mybatis“¿¿µ
+    compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.1')
+    //ÃÌº”mysql“¿¿µ
+    compile('mysql:mysql-connector-java')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('net.sourceforge.nekohtml:nekohtml:1.9.22')
+		
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	
+}
